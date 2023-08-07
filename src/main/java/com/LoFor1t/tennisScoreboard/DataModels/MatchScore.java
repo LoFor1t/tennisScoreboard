@@ -6,12 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MatchScore extends Match{
-    private int player1Score;
-    private int player2Score;
-    private int player1GameWins;
-    private int player2GameWins;
-    private int player1SetWins;
-    private int player2SetWins;
+    private PlayerScore player1Score;
+    private PlayerScore player2Score;
 
     public MatchScore(Player player1, Player player2) {
         super(player1, player2);

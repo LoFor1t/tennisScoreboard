@@ -1,6 +1,6 @@
 package com.LoFor1t.tennisScoreboard.Controllers;
 
-import com.LoFor1t.tennisScoreboard.DataModels.Match;
+import com.LoFor1t.tennisScoreboard.DataModels.MatchScore;
 import com.LoFor1t.tennisScoreboard.DataModels.Player;
 import com.LoFor1t.tennisScoreboard.DataRepositories.PlayerRepository;
 import com.LoFor1t.tennisScoreboard.Services.OngoingMatchesService;
@@ -37,7 +37,7 @@ public class NewMatchController {
         Optional<Player> player1 = playerRepository.findByName(player1Name);
         Optional<Player> player2 = playerRepository.findByName(player2Name);
 
-        Match newMatch = new Match(player1.get(), player2.get());
+        MatchScore newMatch = new MatchScore(player1.get(), player2.get());
         UUID newMatchUUID = UUID.randomUUID();
         OngoingMatchesService.addMatch(newMatchUUID, newMatch);
         return "redirect:match-score?uuid=" + newMatchUUID;
