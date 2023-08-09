@@ -7,8 +7,8 @@ import lombok.Getter;
 import java.util.HashMap;
 import java.util.UUID;
 
+@Getter
 public class OngoingMatchesService {
-    @Getter
     private static HashMap<UUID, MatchScore> currentMatches = new HashMap<>();
 
     public static void addMatch(UUID id, Match match) {
@@ -17,5 +17,9 @@ public class OngoingMatchesService {
 
     public static void deleteMatch(UUID id) {
         currentMatches.remove(id);
+    }
+
+    public static MatchScore getMatchScoreById(UUID id) {
+        return currentMatches.get(id);
     }
 }
