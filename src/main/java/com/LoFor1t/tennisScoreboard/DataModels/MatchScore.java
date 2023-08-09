@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MatchScore extends Match{
+    private MatchStatus matchStatus = MatchStatus.Going;
     private PlayerScore player1Score = new PlayerScore();
     private PlayerScore player2Score = new PlayerScore();
 

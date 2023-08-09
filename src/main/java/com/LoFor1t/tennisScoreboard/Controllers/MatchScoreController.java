@@ -25,9 +25,9 @@ public class MatchScoreController {
     public String addScoreToPlayer(@RequestParam("player") String player, @RequestParam("uuid") String uuid, ModelMap model) {
         MatchScore matchScore = OngoingMatchesService.getMatchScoreById(UUID.fromString(uuid));
         if (player.equals("player-1-win")) {
-            MatchScoreCalculationService.addScore(matchScore.getPlayer1Score());
+            new MatchScoreCalculationService(matchScore.getPlayer1Score(), matchScore.getPlayer2Score(), matchScore).addScore();
         } else {
-            MatchScoreCalculationService.addScore(matchScore.getPlayer2Score());
+            new MatchScoreCalculationService(matchScore.getPlayer2Score(), matchScore.getPlayer1Score(), matchScore).addScore();
         }
         model.addAttribute("match", matchScore);
         return "match-score";

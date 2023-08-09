@@ -1,17 +1,50 @@
 package com.LoFor1t.tennisScoreboard.Services;
 
+import com.LoFor1t.tennisScoreboard.DataModels.MatchScore;
+import com.LoFor1t.tennisScoreboard.DataModels.MatchStatus;
 import com.LoFor1t.tennisScoreboard.DataModels.PlayerScore;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class MatchScoreCalculationService {
-    public static void addScore(PlayerScore playerScore) {
-        switch (playerScore.getScore()) {
-            case 0 -> playerScore.setScore(15);
-            case 15 -> playerScore.setScore(30);
-            case 30 -> playerScore.setScore(40);
-            case 40 -> {
-                playerScore.setScore(0);
-                playerScore.setGameWins(playerScore.getGameWins() + 1);
+    private PlayerScore winnerPlayerScore;
+    private PlayerScore loserPlayerScore;
+    private MatchScore matchScore;
+
+    public void addScore() {
+        if (matchScore.getMatchStatus() == MatchStatus.Going) {
+            switch (winnerPlayerScore.getScore()) {
+                case 0 -> winnerPlayerScore.setScore(15);
+                case 15 -> winnerPlayerScore.setScore(30);
+                case 30 -> winnerPlayerScore.setScore(40);
+                case 40 -> {
+                    addGameWins();
+                }
+            }
+        } else if (matchScore.getMatchStatus() == MatchStatus.MoreLess) {
+            winnerPlayerScore.setScore(winnerPlayerScore.getScore() + 1);
+            if (winnerPlayerScore.getScore() - loserPlayerScore.getScore() == 2) {
+                addGameWins();
             }
         }
+    }
+
+    public void addGameWins() {
+        if (winnerPlayerScore.getScore() == 40 && loserPlayerScore.getScore() == 40 && matchScore.getMatchStatus() == MatchStatus.Going) {
+            matchScore.setMatchStatus(MatchStatus.MoreLess);
+            winnerPlayerScore.setScore(1);
+            loserPlayerScore.setScore(0);
+        } else if (matchScore.getMatchStatus() == MatchStatus.MoreLess) {
+            matchScore.setMatchStatus(MatchStatus.Going);
+            addGameWinAndResetScore();
+        } else {
+            addGameWinAndResetScore();
+        }
+    }
+
+    public void addGameWinAndResetScore() {
+        winnerPlayerScore.setGameWins(winnerPlayerScore.getGameWins() + 1);
+        winnerPlayerScore.setScore(0);
+        loserPlayerScore.setScore(0);
     }
 }
