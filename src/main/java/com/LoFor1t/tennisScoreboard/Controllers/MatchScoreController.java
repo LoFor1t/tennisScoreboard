@@ -38,6 +38,8 @@ public class MatchScoreController {
                 OngoingMatchesService.deleteMatch(UUID.fromString(uuid));
                 Match match = new Match(matchScore.getPlayer1(), matchScore.getPlayer2(), matchScore.getPlayer1());
                 matchRepository.save(match);
+                model.addAttribute("match", match);
+                return "final-score";
             }
         } else {
             new MatchScoreCalculationService(matchScore.getPlayer2Score(), matchScore.getPlayer1Score(), matchScore).addScore();
@@ -45,6 +47,8 @@ public class MatchScoreController {
                 OngoingMatchesService.deleteMatch(UUID.fromString(uuid));
                 Match match = new Match(matchScore.getPlayer1(), matchScore.getPlayer2(), matchScore.getPlayer2());
                 matchRepository.save(match);
+                model.addAttribute("match", match);
+                return "final-score";
             }
         }
         model.addAttribute("match", matchScore);

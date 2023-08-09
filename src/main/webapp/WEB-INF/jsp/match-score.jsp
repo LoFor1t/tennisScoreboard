@@ -10,7 +10,7 @@
 <%@ page import="com.LoFor1t.tennisScoreboard.DataModels.MatchStatus" %>
 <html>
 <head>
-  <title>Title</title>
+  <title>Match core</title>
 </head>
 <body>
   <form method="post">
