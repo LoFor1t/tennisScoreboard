@@ -12,6 +12,11 @@
     <title>Matches</title>
 </head>
 <body>
+    <form method="get" action="matches">
+        <input type="text" name="filter_by_player_name">
+        <button type="submit">Search by name</button>
+    </form>
+
     <table>
         <tr><th>Player 1</th> <th>Player 2</th> <th>Winner</th></tr>
         <c:forEach var="game" items="${matches}">
