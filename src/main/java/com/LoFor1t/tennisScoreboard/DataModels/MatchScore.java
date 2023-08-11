@@ -1,10 +1,12 @@
 package com.LoFor1t.tennisScoreboard.DataModels;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class MatchScore extends Match{
     private MatchStatus matchStatus = MatchStatus.Going;
     private PlayerScore player1Score = new PlayerScore();
